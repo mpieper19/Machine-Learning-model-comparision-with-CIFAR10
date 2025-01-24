@@ -28,6 +28,9 @@ class LGBM(BaseModel):
     def predict(self, x):
         return self.lgm.predict(x)
 
+    def predict_proba(self, x):
+        return self.lgm.predict_proba(x)
+
     def save(self, file_path):
         with open(file_path, 'wb') as f:
             pk.dump(self.lgm, f)
