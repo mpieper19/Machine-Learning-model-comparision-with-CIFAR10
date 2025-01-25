@@ -4,9 +4,9 @@ import pickle as pk
 
 
 class SVCModel(BaseModel):
-    def __init__(self, probability=True, kernel='linear', C=1.0):
+    def __init__(self, probability=True, kernel='linear', C=1.0, verbose=True):
         super().__init__()
-        self.svc = SVC(probability=probability, kernel=kernel, C=C)
+        self.svc = SVC(probability=probability, kernel=kernel, C=C, verbose=verbose)
 
     def fit(self, x_train, y_train):
         self.svc.fit(x_train, y_train)
