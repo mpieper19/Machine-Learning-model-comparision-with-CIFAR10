@@ -1,4 +1,5 @@
 import matplotlib.pyplot as mp
+import numpy as np
 import seaborn as sb
 from utils.evaluation import evaluate
 from sklearn.metrics import roc_curve, auc
@@ -6,6 +7,18 @@ from sklearn.preprocessing import label_binarize
 
 
 class Visuals():
+
+    def visualise_cifar10(self, x_data, y_data, class_names, num_images=4):
+        indices = np.random.choice(range(x_data.shape[0]), size=num_images, replace=False)
+        mp.figure(figsize=(12, 4))
+        for i, idx in enumerate(indices):
+            mp.subplot(1, num_images, i + 1)
+            mp.imshow(x_data[idx])
+            mp.title(f"Label: {class_names[y_data[idx]]}")
+            mp.axis('off')
+        mp.tight_layout()
+        mp.savefig("results/visualisations/4_example_training_images.png")
+        mp.show()
 
     # CNN Visuals
     ## This function plots the traiing and value losses

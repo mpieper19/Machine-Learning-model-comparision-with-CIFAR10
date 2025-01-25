@@ -32,6 +32,7 @@ class LGBM(BaseModel):
         return self.lgm.predict_proba(x)
 
     def save(self, file_path):
+        self._mkdir()
         with open(file_path, 'wb') as f:
             pk.dump(self.lgm, f)
 

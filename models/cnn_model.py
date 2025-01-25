@@ -65,6 +65,7 @@ class CNNModel(tf.keras.Model, BaseModel):
 
     def save(self, file_path):
         super().save(file_path)
+        self._mkdir()
         print(f"Model saved to {file_path}")
 
     @classmethod

@@ -114,5 +114,7 @@ def train_and_evaluate_model(model_code, model_name, flatten=True):
     return accuracy, report
 
 
+x_train, x_val, x_test, y_train, y_val, y_test = loader.load_dataset()
+visuals.visualise_cifar10(x_train, y_train, loader.class_names, num_images=4)
 # accuracy, results = train_and_evaluate_CNN(num_classes=10)
-accuracy, results = train_and_evaluate_model("svc", "SVC")
+# accuracy, results = train_and_evaluate_model("knn", "KNNTEST")
