@@ -10,28 +10,30 @@ class CNNModel(tf.keras.Model, BaseModel):
         super(CNNModel, self).__init__(**kwargs)
         self.num_classes = num_classes
 
-        # Fewer filters in convolutional layers
+        # Convolution Blocks
+        ## First Block
         self.conv1 = layers.Conv2D(16, (3, 3), activation='relu', padding='same', kernel_regularizer=regularizers.l2(0.006))
         self.batchnorm1 = layers.BatchNormalization()
         self.pool1 = layers.MaxPooling2D((2, 2))
         self.drop1 = layers.Dropout(0.25)
 
+        ## Second Block
         self.conv2 = layers.Conv2D(32, (3, 3), activation='relu', padding='same', kernel_regularizer=regularizers.l2(0.006))
         self.batchnorm2 = layers.BatchNormalization()
         self.pool2 = layers.MaxPooling2D((2, 2))
         self.drop2 = layers.Dropout(0.25)
 
+        ## Third Block
         self.conv3 = layers.Conv2D(64, (3, 3), activation='relu', padding='same', kernel_regularizer=regularizers.l2(0.006))
         self.batchnorm3 = layers.BatchNormalization()
         self.pool3 = layers.MaxPooling2D((2, 2))
         self.drop3 = layers.Dropout(0.35)
 
-        # Reduced number of neurons in the dense layer
+        ## Final layers
         self.flatten = layers.Flatten()
         self.fc1 = layers.Dense(128, activation='relu', kernel_regularizer=regularizers.l2(0.008))
         self.drop4 = layers.Dropout(0.5)
 
-        # Output layer remains the same
         self.output_layer = layers.Dense(num_classes, activation='softmax')
 
     def call(self, inputs):

@@ -8,6 +8,7 @@ from sklearn.preprocessing import label_binarize
 
 class Visuals():
 
+    # Purely for the report
     def visualise_cifar10(self, x_data, y_data, class_names, num_images=4):
         indices = np.random.choice(range(x_data.shape[0]), size=num_images, replace=False)
         mp.figure(figsize=(12, 4))
@@ -23,20 +24,6 @@ class Visuals():
     # CNN Visuals
     ## This function plots the traiing and value losses
     def plot_train_val_loss(self, trained_model, model_name):
-        """
-        Plot the training and validation loss for a given model.
-
-        Parameters
-        ----------
-        trained_model : object
-            The trained model with history attribute.
-        model_name : str
-            The name of the model, used to label the plot.
-
-        Returns
-        -------
-        None
-        """
         mp.figure(figsize=(5, 4))
         mp.plot(trained_model.history['loss'], label='Train Loss')
         mp.plot(trained_model.history['val_loss'], label='Val Loss')
@@ -51,20 +38,6 @@ class Visuals():
 
     ## This function plots the training and value accuracies
     def plot_train_val_accuracy(self, trained_model, model_name):
-        """
-        Plot the training and validation accuracy for a given model.
-
-        Parameters
-        ----------
-        trained_model : object
-            The trained model with history attribute.
-        model_name : str
-            The name of the model, used to label the plot.
-
-        Returns
-        -------
-        None
-        """
         mp.figure(figsize=(5, 4))
         mp.plot(trained_model.history['accuracy'], label='Train Accuracy')
         mp.plot(trained_model.history['val_accuracy'], label='Val Accuracy')
@@ -78,25 +51,8 @@ class Visuals():
         mp.show()
 
     # Other Visuals
+    ## Confusion matrix heatmapping
     def plot_confision_matrix(self, y_pred, y_true, classes, model_name):
-        """
-        Plot the confusion matrix for a given model.
-
-        Parameters
-        ----------
-        y_pred : array-like
-            Predicted labels.
-        y_true : array-like
-            True labels.
-        classes : list
-            List of class labels.
-        model_name : str
-            The name of the model, used to label the plot.
-
-        Returns
-        -------
-        None
-        """
         con_matrix = evaluate("confusion_matrix", y_pred, y_true)
         mp.figure(figsize=(8, 6))
         sb.heatmap(con_matrix, annot=True, fmt="d", cmap="Blues", xticklabels=classes, yticklabels=classes)
@@ -106,25 +62,8 @@ class Visuals():
         mp.savefig(f"results/visualisations/{model_name}_confusionmatrix.png")
         mp.show()
 
+    ## Plots the ROC AUC plots/curves
     def plot_ROC_AUC(self, y_true, y_pred_probs, classes, model_name):
-        """
-        Plot the ROC curve and compute the AUC for a given model.
-
-        Parameters
-        ----------
-        y_true : array-like
-            True labels.
-        y_pred_probs : array-like
-            Predicted probabilities.
-        classes : list
-            List of class labels.
-        model_name : str
-            The name of the model, used to label the plot.
-
-        Returns
-        -------
-        None
-        """
         y_true_binarized = label_binarize(y_true, classes=range(len(classes)))
         n_classes = len(classes)
 

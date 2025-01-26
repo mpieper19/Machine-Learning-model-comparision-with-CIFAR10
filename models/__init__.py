@@ -1,8 +1,5 @@
 from models.cnn_model import CNNModel
 from models.knn_model import KNNModel
-from models.svc_model import SVCModel
-from models.logistic_regression_model import LogisticRegressionModel
-from models.xgboost_model import XGBoostModel
 from models.lightgbm_model import LGBM
 from models.catboost_model import CatBoosst
 from models.random_forest_model import RFCModel
@@ -21,9 +18,6 @@ __all__ = [
 _model_map = {
     'cnn': CNNModel,
     'knn': KNNModel,
-    'svc': SVCModel,
-    'lgr': LogisticRegressionModel,
-    'xgb': XGBoostModel,
     'lgbm': LGBM,
     'cat': CatBoosst,
     'forest': RFCModel

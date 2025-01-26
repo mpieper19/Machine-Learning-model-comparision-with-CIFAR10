@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 
 class Dataloader:
     def __init__(self):
+        # This stores the CIFAR-10 Class labels into a list
         self.class_names = [
             "Airplanes",
             "Cars",
@@ -23,6 +24,7 @@ class Dataloader:
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
         # Add a limit to how many training images
+        ## Only for private use, our models are trained on the full dataset
         if limit_train is not None:
             x_train = x_train[:limit_train]
             y_train = y_train[:limit_train]
