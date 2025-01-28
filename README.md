@@ -9,7 +9,7 @@ Intro to Machine Learning WBAI056
 
 ## About the Project
 
-This project comapres the accuracy and effectiveness of a (custom-built) Convolutional Neural Network (CNN), to a handful of other standard machine learning models, on the CIFAR-10 dataset. The following machine learning models are used:
+This project was conducted with two other students, where we comapre the accuracy and effectiveness of a (custom-built) Convolutional Neural Network (CNN), to a handful of other standard machine learning models, on the CIFAR-10 dataset. The following machine learning models are used:
 - K-Nearest-Neighbors (KNN)
 - Light-Gradient-Boosting-Model (LightGBM)
 - CatBoost
