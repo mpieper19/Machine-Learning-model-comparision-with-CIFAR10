@@ -7,9 +7,6 @@ from models.random_forest_model import RFCModel
 __all__ = [
     'CNNModel',
     'KNNModel',
-    'SVCModel',
-    'LogisticRegressionModel',
-    'XGBoostModel',
     'LGBM',
     'CatBoosst',
     'RFCModel'
