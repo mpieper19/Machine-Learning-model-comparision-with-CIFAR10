@@ -1,7 +1,6 @@
 from utils.data_loader import Dataloader
 from models import get_model
 from utils.evaluation import evaluate, save_classification_report
-# from keras import models, utils
 import tensorflow as tf
 import numpy as np
 from utils.visualisation import Visuals
