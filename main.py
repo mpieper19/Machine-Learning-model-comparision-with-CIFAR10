@@ -90,7 +90,7 @@ def train_and_evaluate_model(model_code, model_name, flatten=True):
 # Execution of training CNN
 ## For testing purposes, I recomend running either CNN, or KNN models. This is because (depending on hardware),
 ## the other models may take a while to train (2-3 horus)
-accuracy, results = train_and_evaluate_CNN(num_classes=10)
+accuracy, results = train_and_evaluate_CNN()
 
 # Execution of training other models, view model map in models/__init__.py for model codes
-accuracy, results = train_and_evaluate_model("knn", "KNN")
+# accuracy, results = train_and_evaluate_model("knn", "KNN")
