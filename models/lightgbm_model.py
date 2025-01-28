@@ -1,7 +1,6 @@
 from models.model_template import BaseModel
 from lightgbm import LGBMClassifier
 import pickle as pk
-from tqdm import tqdm
 
 class LGBM(BaseModel):
     def __init__(self, n_estimators=100, learning_rate=0.1, max_depth=-1, min_child_samples=5, min_split_gain=0.001):
