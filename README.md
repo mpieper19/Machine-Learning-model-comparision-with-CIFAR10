@@ -83,11 +83,13 @@ CNN Accuracy: **70%**
 
 CNN Training and Validation Loss Plot:
 
-![image](https://github.com/user-attachments/assets/3ecc8441-2a68-48e4-9cdf-3e75a59b3149)
+![image](https://github.com/user-attachments/assets/7141c367-967f-4cda-83fa-aa63baef773d)
+
 
 CNN Training and Validation Accuracy Plot:
 
-![image](https://github.com/user-attachments/assets/94bc674f-57f1-459e-8d04-f908ffb5a153)
+![image](https://github.com/user-attachments/assets/24139414-1d56-4715-92da-adf74a6753ec)
+
 
 CNN ROC/AUC Curve:
 
@@ -119,6 +121,8 @@ Random Forest Classifier ROC/AUC Curve:
 ### LightGBM Results:
 LightGBM Accuracy: **53%**
 
+LightGBM Loss Plot:
+
 LightGBM Confusion Matrix:
 
 ![image](https://github.com/user-attachments/assets/e76f81ee-c215-46f4-8d4c-400fe483c648)
@@ -130,13 +134,20 @@ LightGBM ROC/AUC Curve:
 ### CatBoost Results:
 CatBoost Accuracy: **58%**
 
+Catboost Loss Plot:
+
+![image](https://github.com/user-attachments/assets/0828f635-deeb-4949-b61c-d2100d632c99)
+
+
 CatBoost Confusionn Matrix:
 
-![image](https://github.com/user-attachments/assets/b3b0eb8c-1190-4308-b461-7f9feb33efce)
+![image](https://github.com/user-attachments/assets/6ab7737d-16ef-4392-989e-b11ddc2dff5f)
+
 
 CatBoost ROC/AUC Curve:
 
-![image](https://github.com/user-attachments/assets/9337976d-cb0c-4710-8915-1bc1c79a151b)
+![image](https://github.com/user-attachments/assets/b4a42fc1-14ed-4c72-b639-81f79eacf0c1)
+
 
 ## License
 This project is licensed under the MIT License.
