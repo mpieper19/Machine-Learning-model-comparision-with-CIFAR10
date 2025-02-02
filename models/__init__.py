@@ -22,19 +22,6 @@ _model_map = {
 
 
 def get_model(name, **kwargs):
-    """
-    Retrieve a machine learning model based on the provided name.
-
-    Parameters:
-        name (str): The identifier for the model to retrieve. Must be one of the keys in _model_map.
-        **kwargs: Additional keyword arguments to pass to the model's constructor.
-
-    Returns:
-        object: An instance of the specified machine learning model.
-
-    Raises:
-        ValueError: If the provided name does not match any key in _model_map.
-    """
     name = name.lower()
     if name not in _model_map:
         raise ValueError(f"Unknown model: {name}.")

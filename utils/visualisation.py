@@ -22,25 +22,11 @@ class Visuals():
         mp.show()
 
     # CNN Visuals
-    ## This function plots the traiing and value losses
-    def plot_train_val_loss(self, trained_model, model_name):
-        mp.figure(figsize=(5, 4))
-        mp.plot(trained_model.history['loss'], label='Train Loss')
-        mp.plot(trained_model.history['val_loss'], label='Val Loss')
-        mp.title(f'{model_name} Model Loss')
-        mp.xlabel('Epochs')
-        mp.ylabel('Loss')
-        mp.legend()
-
-        mp.tight_layout()
-        mp.savefig(f"results/visualisations/{model_name}_loss.png")
-        mp.show()
-
     ## This function plots the training and value accuracies
     def plot_train_val_accuracy(self, trained_model, model_name):
-        mp.figure(figsize=(5, 4))
+        mp.figure(figsize=(8, 5))
         mp.plot(trained_model.history['accuracy'], label='Train Accuracy')
-        mp.plot(trained_model.history['val_accuracy'], label='Val Accuracy')
+        mp.plot(trained_model.history['val_accuracy'], label='Val Accuracy', linestyle='dashed')
         mp.title(f'{model_name} Model Accuracy')
         mp.xlabel('Epochs')
         mp.ylabel('Accuracy')
@@ -94,4 +80,43 @@ class Visuals():
         mp.legend(loc="best")
         mp.tight_layout()
         mp.savefig(f"results/visualisations/{model_name}_roc_auc.png")
+        mp.show()
+
+
+    def plot_loss(self, trained_model, model_name, model_type):
+        """Plots training and validation loss for CNN, LightGBM, or CatBoost models."""
+        
+        mp.figure(figsize=(8, 5))
+
+        if model_type == "cnn":
+            # CNN Loss Tracking
+            mp.plot(trained_model.history['loss'], label='Train Loss')
+            mp.plot(trained_model.history['val_loss'], label='Val Loss', linestyle='dashed')
+
+        elif model_type == "lgbm":
+            # LightGBM Loss Tracking
+            train_loss = trained_model.evals_result_["Train"]["multi_logloss"]
+            val_loss = trained_model.evals_result_["Validation"]["multi_logloss"]
+            mp.plot(train_loss, label='Train Loss')
+            mp.plot(val_loss, label='Validation Loss', linestyle='dashed')
+
+        elif model_type == "cat":
+            # CatBoost Loss Tracking
+            eval_results = trained_model.get_evals_result()
+            train_loss = eval_results['learn']['MultiClass']
+            val_loss = eval_results['validation']['MultiClass']
+            mp.plot(train_loss, label="Train Loss")
+            mp.plot(val_loss, label="Validation Loss", linestyle="dashed")
+
+        else:
+            print(f"Model type '{model_type}' not supported.")
+            return
+
+        # Plot Formatting
+        mp.title(f'{model_name} Loss Over Iterations')
+        mp.xlabel('Epochs' if model_type == "cnn" else 'Iterations')
+        mp.ylabel('Log Loss')
+        mp.legend()
+        mp.tight_layout()
+        mp.savefig(f"results/visualisations/{model_name}_loss.png")
         mp.show()

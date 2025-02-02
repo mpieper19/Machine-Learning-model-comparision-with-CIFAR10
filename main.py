@@ -27,8 +27,8 @@ def train_and_evaluate_CNN(one_hot=True, flatten=False):
     trained_model = cnn.fit(x_train, y_train, validation_split=0.3, epochs=50, batch_size=256, verbose=1, shuffle=True)
     print("Fitted")
 
-    visuals.plot_train_val_loss(trained_model, "CNN")
-    visuals.plot_train_val_accuracy(trained_model, "CNN")
+    visuals.plot_loss(trained_model, "CNN", "cnn") # Plots training and validation loss
+    visuals.plot_train_val_accuracy(trained_model, "CNN") # Plots training and validation accuracy
 
     cnn.save(save_path)
     print("saved")
@@ -58,9 +58,12 @@ def train_and_evaluate_CNN(one_hot=True, flatten=False):
 ## Flattening of images set to True
 def train_and_evaluate_model(model_code, model_name, flatten=True):
     save_path = f"results/models/{model_name}_model.pkl"
-    x_train, _, x_test, y_train, _, y_test = loader.load_dataset(flatten=flatten)
+    x_train, x_val, x_test, y_train, y_val, y_test = loader.load_dataset(flatten=flatten)
     model = get_model(model_code)
-    model.fit(x_train, y_train)
+    if model_code == "cat" or model_code == "lgbm":
+        model.fit(x_train, y_train, x_val, y_val)
+    else:
+        model.fit(x_train, y_train)
     print("Fitted")
     model.save(save_path)
     print("Saved")
@@ -75,8 +78,14 @@ def train_and_evaluate_model(model_code, model_name, flatten=True):
     report_dict = evaluate('classification_report_dict', y_test, y_pred, target_names=loader.class_names)
     save_classification_report(report_dict, name=f"{model_name}_classification_report", path="results/reports")
 
-    visuals.plot_confision_matrix(y_pred, y_test, loader.class_names, model_name=model_name)
-    visuals.plot_ROC_AUC(y_test, y_pred_probs, loader.class_names, model_name=model_name)
+    visuals.plot_confision_matrix(y_pred, y_test, loader.class_names, model_name=model_name) # Plots confusion matrix
+    visuals.plot_ROC_AUC(y_test, y_pred_probs, loader.class_names, model_name=model_name) # Plots ROC curve
+
+    if model_code == "cat" or model_code == "lgbm":
+        visuals.plot_loss(model, model_name, model_code) # Plots training and validation loss for gradient boosting models
+    else:
+        pass
+
     print(f"{model_name} Accuracy: {accuracy:.2f}")
     print("\nClassification Report:\n", report)
 
@@ -89,7 +98,7 @@ def train_and_evaluate_model(model_code, model_name, flatten=True):
 # Execution of training CNN
 ## For testing purposes, I recomend running either CNN, or KNN models. This is because (depending on hardware),
 ## the other models may take a while to train (2-3 horus)
-accuracy, results = train_and_evaluate_CNN()
+# accuracy, results = train_and_evaluate_CNN()
 
 # Execution of training other models, view model map in models/__init__.py for model codes
-# accuracy, results = train_and_evaluate_model("knn", "KNN")
+accuracy, results = train_and_evaluate_model("lgbm", "LightGBM")
